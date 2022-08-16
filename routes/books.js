@@ -1,6 +1,8 @@
 const express = require ('express');
-const router = expressRouter(); 
+const router = express.Router(); 
 const Book = require('../models').Book;
+
+// var app = express()
 
 function asyncHandler(cb) {
     return async (req, res, next) => {
