@@ -2,8 +2,6 @@ const express = require ('express');
 const router = express.Router(); 
 const Book = require('../models').Book;
 
-// var app = express()
-
 function asyncHandler(cb) {
     return async (req, res, next) => {
       try {
@@ -14,11 +12,11 @@ function asyncHandler(cb) {
       }
     };
   }
-// get / - Home route should redirect to the /books route
+// GET Method / - Home route should redirect to the /books route
 router.get("/", async function (req, res) {
     res.redirect("/books");
   });
-// get /books - Shows the full list of books
+// GET Method /books - Shows the full list of books
 router.get(
     "/books",
     asyncHandler(async (req, res) => {
@@ -29,7 +27,7 @@ router.get(
         });
     })
   );
-// get /books/new - Shows the create new book form
+// GET Method /books/new - This route shows the create new book form page 
 router.get(
     "/books/new",
     asyncHandler(async (req, res) => {
@@ -39,7 +37,7 @@ router.get(
         });
     })
   );
-// post /books/new - Posts a new book to the database
+// POST Method /books/new - This route posts a new book to the database
 router.post(
     "/books/new",
     asyncHandler(async (req, res, next) => {
@@ -61,7 +59,7 @@ router.post(
       }
     })
   );
-// get /books/:id - Shows book detail form
+// GET Method /books/:id - This route shows book detail form
 router.get("/books/:id", asyncHandler(async(req,res) => {
     const book = await Book.findByPk(req.params.id);
     if(book){
@@ -70,7 +68,7 @@ router.get("/books/:id", asyncHandler(async(req,res) => {
       res.render("page-not-found");
     }
   }));
-// post /books/:id - Updates book info in the database
+// POST Method /books/:id - This route updates book information in the database
 router.post(
     "/books/:id",
     asyncHandler(async (req, res, next) => {
@@ -99,7 +97,7 @@ router.post(
       }
     })
   );
-// post /books/:id/delete - Deletes a book
+// POST Method /books/:id/delete - This route deletes a book from database
 router.post(
     "/books/:id/delete",
     asyncHandler(async (req, res) => {
