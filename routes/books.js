@@ -67,9 +67,7 @@ router.get(
     if(book){
     res.render("update-book", {book});
     }else {
-          const err = new Error(404)
-      err.message = "Book not found"
-      next(err)
+      res.render("page-not-found");
     }
   }));
 // POST Method /books/:id - This route updates book information in the database
