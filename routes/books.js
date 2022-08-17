@@ -60,12 +60,16 @@ router.post(
     })
   );
 // GET Method /books/:id - This route shows book detail form
-router.get("/books/:id", asyncHandler(async(req,res) => {
+router.get(
+  "/books/:id", 
+  asyncHandler(async(req,res) => {
     const book = await Book.findByPk(req.params.id);
     if(book){
     res.render("update-book", {book});
     }else {
-      res.render("page-not-found");
+      const err = new Error(404)
+      err.message = "Book not found"
+      next(err)
     }
   }));
 // POST Method /books/:id - This route updates book information in the database
