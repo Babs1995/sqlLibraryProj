@@ -51,7 +51,8 @@ router.post(
         if (error.name === "SequelizeValidationError") {
           book = await Book.build(req.body);
           res.render("new-book", { 
-              book: book.dataValues, 
+              book,
+              title: "New Book", 
               errors: error.errors 
             });
         } else {
